@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Proyecto_Productos_1ºEval.Views;
 
-public partial class MainGoogle : UserControl
+public partial class BienvenidaView : UserControl
 {
-    public MainGoogle()
+    public BienvenidaView()
     {
         InitializeComponent();
     }

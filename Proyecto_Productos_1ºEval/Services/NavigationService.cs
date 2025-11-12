@@ -20,6 +20,8 @@ public partial class NavigationService:ObservableObject
 
     private NavigationViewItem itemGoogle;
     private NavigationViewItem itemHello;
+    private NavigationViewItem itemCreate;
+    private NavigationViewItem itemList;
 
     public NavigationService()
     {
@@ -35,9 +37,23 @@ public partial class NavigationService:ObservableObject
             Tag = "bienvenida",
             IconSource = new SymbolIconSource(){Symbol = Symbol.Shop}
         };
+        itemCreate = new NavigationViewItem()
+        {
+            Content = "Crear Producto",
+            Tag = "crear",
+            IconSource = new SymbolIconSource() { Symbol = Symbol.Phone }
+        };
+        itemList = new NavigationViewItem()
+        {
+            Content = "Lista de Productos",
+            Tag = "lista",
+            IconSource = new SymbolIconSource() { Symbol = Symbol.Library }
+        };
         
         MenuItems.Add(itemGoogle);
         MenuItems.Add(itemHello);
+        MenuItems.Add(itemCreate);
+        MenuItems.Add(itemList);
         
         NavigateTo("google");
     }
@@ -50,12 +66,27 @@ public partial class NavigationService:ObservableObject
             registro.DataContext = new MainGoogleModel(this);
             VistaActual = registro;
             MenuSeleccionado = itemGoogle;
-        }else if (tag.Equals("bienvenida"))
+        }
+        else if (tag.Equals("bienvenida"))
         {
             BienvenidaView menu = new BienvenidaView();
             menu.DataContext = new MainBienvenidaModel(this);
             VistaActual = menu;
             MenuSeleccionado = itemHello;
+        }
+        else if (tag.Equals("crear"))
+        {
+            CreateProductView create = new CreateProductView();
+            create.DataContext = new MainCreateProductModel(this);
+            VistaActual = create;
+            MenuSeleccionado = itemCreate;
+        }
+        else if (tag.Equals("lista"))
+        {
+            ListProductView list = new ListProductView();
+            list.DataContext = new MainListProductModel(this);
+            VistaActual = list;
+            MenuSeleccionado = itemList;
         }
     }
     

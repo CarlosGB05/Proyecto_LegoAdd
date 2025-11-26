@@ -2,6 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
              xmlns:vm="clr-namespace:Proyecto_Productos_1ºEval.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Proyecto_Productos_1ºEval.Views.ListProductView"
@@ -10,5 +12,58 @@
         <vm:MainListProductModel/>
     </Design.DataContext>
     
-    <TextBlock Text="Lista Todos los Productos"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <dialogHostAvalonia:DialogHost Identifier="editar"
+                                       CloseOnClickAway="True"
+                                       ZIndex="1"
+                                       Grid.ColumnSpan="2">
+            <dialogHostAvalonia:DialogHost.Content/>
+        </dialogHostAvalonia:DialogHost>
+        <dialogHostAvalonia:DialogHost Identifier="eliminar"
+                                       CloseOnClickAway="True"
+                                       ZIndex="1"
+                                       Grid.ColumnSpan="2">
+            <dialogHostAvalonia:DialogHost.Content/>
+        </dialogHostAvalonia:DialogHost>
+        
+        <StackPanel Grid.Column="0" HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Lista Todos los Productos" Margin="25"
+                       HorizontalAlignment="Center"/>
+            
+            <ListBox Name="ListaProductoBox"
+                     ItemsSource="{Binding ListaProductos}" Width="550" Height="250">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Width="150" Height="150"
+                                   asyncImageLoader:ImageLoader.Source="https://cdn-icons-png.flaticon.com/512/1311/1311467.png"/>
+                            <TextBlock Text="{Binding codigo}"/>
+                            <TextBlock Text="{Binding descripcion}"/>
+                            <TextBlock Text="{Binding cantidad}"/>
+                            <TextBlock Text="{Binding categoria}"/>
+                            <TextBlock Text="{Binding fecha}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Button Content="Volver Inicio" 
+                    Command="{Binding NavegarBienvenidaCommand}"/>
+            <Button Content="Editar Producto" 
+                    Command="{Binding EditarProductoCommand}"/>
+            <Button Content="Eliminar Producto" 
+                    Command="{Binding EliminarProductoCommand}"/>
+        </StackPanel>
+        
+    </Grid>
+    
 </UserControl>

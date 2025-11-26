@@ -10,5 +10,36 @@
         <vm:MainCreateProductModel/>
     </Design.DataContext>
     
-    <TextBlock Text="Crear Nuevo Producto"></TextBlock>
+    <StackPanel>
+        <TextBlock Text="Crear Nuevo Producto" Margin="20"></TextBlock>
+        
+        <StackPanel Margin="20" HorizontalAlignment="Center" 
+                    Background="Aqua" Width="300">
+            <TextBlock Text="Codigo de Barras"/>
+            <TextBox Text="{Binding Producto.codigo}" Width="200"/>
+            <TextBlock Text="Descripcion Producto"/>
+            <TextBox Text="{Binding Producto.descripcion}" 
+                     Width="200"/>
+            <TextBlock Text="Cantidad"/>
+            <NumericUpDown Text="Cantidad" Width="200" 
+                           Value="{Binding Producto.cantidad}"/>
+            <TextBlock Text="Categoria"/>
+            <ComboBox Width="200" SelectedItem="{Binding Producto.categoria}"
+                ItemsSource="{Binding Categoria}"></ComboBox>
+            <TextBlock Text="Fecha"/>
+            <CalendarDatePicker Width="200"
+                SelectedDate="{Binding Producto.fecha}"/>
+            <TextBlock Text="Disponible"/>
+            
+            <TextBlock Margin="20" FontSize="15"
+                Text="{Binding Mensaje}"/>
+            <Button Content="Aceptar" 
+                    Command="{Binding CrearProductoCommand}"/>
+            <Button Content="Cancelar"
+                    Command="{Binding NavegarBienvenidaCommand}"/>
+            <Button Content="Ver Lista Producto" 
+                    Command="{Binding NavegarListaCommand}"/>
+        </StackPanel>
+    </StackPanel>
+    
 </UserControl>

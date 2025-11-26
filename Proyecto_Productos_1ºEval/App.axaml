@@ -15,6 +15,7 @@
     </Application.DataTemplates>
 
     <Application.Styles>
+        <dialogHostAvalonia1:DialogHostStyles/>
         <styling1:FluentAvaloniaTheme/>
     </Application.Styles>
 </Application>

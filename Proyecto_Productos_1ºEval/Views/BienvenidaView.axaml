@@ -9,6 +9,12 @@
     <Design.DataContext>
         <vm:MainGoogleModel />
     </Design.DataContext>
+    <StackPanel>
+        <TextBlock Text="Bienvenido a mi aplicacion"/>
+        <Button Content="Crear Nuevo Producto" 
+                Command="{Binding NavegarCrearCommand}"/>
+        <Button Content="Ver Lista Producto" 
+                Command="{Binding NavegarListaCommand}"/>
+    </StackPanel>
     
-    <TextBlock Text="Bienvenido a mi aplicacion"/>
 </UserControl>

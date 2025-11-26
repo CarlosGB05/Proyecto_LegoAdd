@@ -27,13 +27,13 @@ public partial class NavigationService:ObservableObject
     {
         itemGoogle = new NavigationViewItem()
         {
-            Content = "Inicio",
+            Content = "Registro",
             Tag = "google",
             IconSource = new SymbolIconSource(){Symbol = Symbol.Home}
         };
         itemHello = new NavigationViewItem()
         {
-            Content = "Tienda",
+            Content = "Inicio",
             Tag = "bienvenida",
             IconSource = new SymbolIconSource(){Symbol = Symbol.Shop}
         };

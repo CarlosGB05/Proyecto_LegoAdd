@@ -1,0 +1,34 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Proyecto_Productos_1ºEval.ViewModels"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Proyecto_Productos_1ºEval.Views.Dialogs.EliminarProducto"
+             x:DataType="vm:EliminarProductoModel">
+    <Design.DataContext>
+        <vm:EliminarProductoModel/>
+    </Design.DataContext>
+    
+    <Grid Grid.RowDefinitions="*,*,*" Background="Aqua" Width="500" Height="250">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="ATENCIÓN" Foreground="White" Margin="0,25,0,0"
+                       HorizontalAlignment="Center" FontSize="30"/>
+            <avalonia:MaterialIcon Kind="Alert" Width="30"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="¿Deseas eliminar este producto?" 
+                       HorizontalAlignment="Center" FontSize="25"
+                       Margin="0,15,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+            <Button Content="Aceptar" Width="150" Margin="0,0,20,20"
+                    Command="{Binding CerrarEliminarCommand}"/>
+            <Button Content="Cancelar" Width="150" Margin="0,0,20,20"
+                    Command="{Binding CerrarEliminarCommand}"/>
+        </StackPanel>
+    </Grid>
+    
+    
+</UserControl>

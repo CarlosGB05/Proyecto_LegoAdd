@@ -1,0 +1,69 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Proyecto_Productos_1ºEval.ViewModels"
+             xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+             xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="600"
+             x:Class="Proyecto_Productos_1ºEval.Views.Dialogs.EditarProducto"
+             x:DataType="vm:MainEditarProductoModel">
+    <Design.DataContext>
+        <vm:MainEditarProductoModel/>
+    </Design.DataContext>
+    
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Editar Producto" HorizontalAlignment="Center"
+                       FontSize="40" Foreground="Aqua"
+                       Margin="10,15,10,10"/>
+            
+            <TextBox UseFloatingWatermark="True" Classes="outline" 
+                     Theme="{StaticResource OutlineTextBox}" 
+                     assists:TextFieldAssist.Label="Codigo" 
+                     assists:TextFieldAssist.Hints="{StaticResource TextFieldTip1}" 
+                     Text="{Binding Producto.codigo}" Width="240"
+                     Watermark="Escribe el Codigo..." Margin="10"/>
+            
+            <TextBox UseFloatingWatermark="True" Classes="outline" 
+                     Theme="{StaticResource OutlineTextBox}" 
+                     assists:TextFieldAssist.Label="Descripcion" 
+                     assists:TextFieldAssist.Hints="{StaticResource TextFieldTip1}" 
+                     Text="{Binding Producto.descripcion}" Width="240"
+                     Watermark="Escribe una descripcion..." Margin="10"/>
+            
+            <NumericUpDown Watermark="Enter text" p1:TextFieldAssist.Hints="Here is the hint" 
+                           p1:TextFieldAssist.Label="Cool label" Width="240" Margin="10"
+                           Value="{Binding Producto.cantidad}"/>
+            
+            <ComboBox PlaceholderText="Categoria" Width="240" Margin="10"
+                      HorizontalAlignment="Center"
+                      SelectedItem="{Binding Producto.categoria}">
+                <ComboBoxItem>Limpieza</ComboBoxItem>
+                <ComboBoxItem>Hogar</ComboBoxItem>
+                <ComboBoxItem>Jardineria</ComboBoxItem>
+                <ComboBoxItem>Informatica</ComboBoxItem>
+                <ComboBoxItem>Alimentacion</ComboBoxItem>
+            </ComboBox>
+            
+            <DatePicker Name="DatePicker2" HorizontalAlignment="Center"
+                        SelectedDate="{Binding Producto.fecha}" 
+                        assists:DatePickerAssist.DateTimeFormat="yyyy-MM-dd"
+                        Width="250" Margin="10"/>
+            
+            <ToggleSwitch Content="booleano pensar" 
+                          IsChecked="{Binding Producto.disponible}"
+                          HorizontalAlignment="Center" Margin="10"/>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Actualizar" Width="120" Margin="10"
+                        Command="{Binding CerrarEditarCommand}"/>
+            
+                <Button Content="Cancelar" Width="120" Margin="10"
+                        Command="{Binding CerrarEditarCommand}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+    
+</UserControl>

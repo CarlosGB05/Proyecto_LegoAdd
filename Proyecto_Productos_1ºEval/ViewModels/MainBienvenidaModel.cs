@@ -13,15 +13,21 @@ public partial class MainBienvenidaModel : ViewModelBase
     }
     
     [RelayCommand]
-    public void NavegarHome()
+    public void NavegarGoogle()
     {
         navegacionBienvenida.NavigateTo("google");
     }
     
     [RelayCommand]
-    public void NavegarTienda()
+    public void NavegarCrear()
     {
-        navegacionBienvenida.NavigateTo("bienvenida");
+        navegacionBienvenida.NavigateTo("crear");
+    }
+    
+    [RelayCommand]
+    public void NavegarLista()
+    {
+        navegacionBienvenida.NavigateTo("lista");
     }
     
 }

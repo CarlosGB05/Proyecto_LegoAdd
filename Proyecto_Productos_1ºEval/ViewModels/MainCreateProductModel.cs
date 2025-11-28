@@ -51,7 +51,7 @@ public partial class MainCreateProductModel : ViewModelBase
     {
         categoria = new List<string>()
         {
-            "Star Wars","Marvel","Ninjago","Batman","Ideas","City"
+            "Star Wars","Marvel","Ninjago","Batman","Ideas","Speed Champions"
         };
     }
 

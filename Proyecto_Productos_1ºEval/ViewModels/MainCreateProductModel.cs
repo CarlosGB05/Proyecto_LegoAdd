@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Proyecto_Productos_1ºEval.Models;
@@ -11,9 +13,9 @@ namespace Proyecto_Productos_1ºEval.ViewModels;
 public partial class MainCreateProductModel : ViewModelBase
 {
     [ObservableProperty]
-    private Producto producto = new();
+    private Lego lego = new();
     [ObservableProperty]
-    private ObservableCollection<Producto> listaProductos = new();
+    private ObservableCollection<Lego> listaLego = new();
     
     [ObservableProperty]
     private List<string> categoria;
@@ -28,7 +30,11 @@ public partial class MainCreateProductModel : ViewModelBase
         navegacionCreate = navegacion;
         CargarCategorias();
     }
-    
+
+    public MainCreateProductModel()
+    {
+    }
+
     [RelayCommand]
     public void NavegarBienvenida()
     {
@@ -45,38 +51,32 @@ public partial class MainCreateProductModel : ViewModelBase
     {
         categoria = new List<string>()
         {
-            "Limpieza","Hogar","Jardineria","Informatica","Alimentacion"
+            "Star Wars","Marvel","Ninjago","Batman","Ideas","City"
         };
     }
 
     [RelayCommand]
-    public void CrearProducto()
+    public async Task CrearLegoAsync()
     {
-        if (string.IsNullOrWhiteSpace(Producto.codigo))
+        if (string.IsNullOrWhiteSpace(Lego.NumSet))
         {
-            Mensaje = "Codigo de Barras Incorrecto";
+            Mensaje = "Numero del Set Incorrecto";
         }
-        else if (string.IsNullOrWhiteSpace(Producto.descripcion))
+        else if (Lego.Cantidad < 0)
         {
-            Mensaje = "Descripcion Incorrecta";
+            Mensaje = "Numero Piezas Incorrecta";
         }
-        else if (Producto.cantidad < 0)
-        {
-            Mensaje = "Cantidad Incorrecta";
-        }
-        else if (string.IsNullOrWhiteSpace(Producto.categoria))
+        else if (string.IsNullOrWhiteSpace(Lego.Categoria))
         {
             Mensaje = "Categoria Incorrecta";
         }
-        else if (Producto.fecha < DateTime.Today)
-        {
-            Mensaje = "Fecha Incorrecta";
-        }
         else
         {
-            ListaProductos.Add(Producto);
-            Producto = new Producto();
-            Mensaje = "Producto Creado Correctamente";
+            var authservice = new LegoAuthService();
+            Lego legoCreado = await authservice.LoginAsync(Lego);
+            Mensaje = "Set Lego Creado Correctamente";
         }
+            
     }
+    
 }

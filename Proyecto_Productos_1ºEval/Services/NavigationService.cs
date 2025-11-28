@@ -22,6 +22,7 @@ public partial class NavigationService:ObservableObject
     private NavigationViewItem itemHello;
     private NavigationViewItem itemCreate;
     private NavigationViewItem itemList;
+    private NavigationViewItem itemService;
 
     public NavigationService()
     {
@@ -39,13 +40,13 @@ public partial class NavigationService:ObservableObject
         };
         itemCreate = new NavigationViewItem()
         {
-            Content = "Crear Producto",
+            Content = "Crear Lego",
             Tag = "crear",
             IconSource = new SymbolIconSource() { Symbol = Symbol.Phone }
         };
         itemList = new NavigationViewItem()
         {
-            Content = "Lista de Productos",
+            Content = "Lista de Legos",
             Tag = "lista",
             IconSource = new SymbolIconSource() { Symbol = Symbol.Library }
         };
@@ -63,7 +64,7 @@ public partial class NavigationService:ObservableObject
         if (tag.Equals("google"))
         {
             GoogleView registro = new GoogleView();
-            registro.DataContext = new MainGoogleModel(this);
+            registro.DataContext = new MainGoogleViewModel(this);
             VistaActual = registro;
             MenuSeleccionado = itemGoogle;
         }

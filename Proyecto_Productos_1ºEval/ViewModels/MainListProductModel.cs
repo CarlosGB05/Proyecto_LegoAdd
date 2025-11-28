@@ -6,18 +6,21 @@ using DialogHostAvalonia;
 using Proyecto_Productos_1ºEval.Models;
 using Proyecto_Productos_1ºEval.Services;
 using Proyecto_Productos_1ºEval.Views.Dialogs;
+using RepasoApp.Services;
 
 namespace Proyecto_Productos_1ºEval.ViewModels;
 
 public partial class MainListProductModel : ViewModelBase
 {
     private NavigationService navegacionList;
-    [ObservableProperty] private AvaloniaList<Producto> listaProductos = new();
+    [ObservableProperty] private AvaloniaList<Lego> listaProductos = new();
+    [ObservableProperty] private AvaloniaList<Lego> listaLegos = new();
 
     public MainListProductModel(NavigationService navegacion)
     {
         navegacionList = navegacion;
         CargarListaProductos();
+        CargarListaLegos();
     }
 
     public MainListProductModel()
@@ -27,24 +30,38 @@ public partial class MainListProductModel : ViewModelBase
 
     public void CargarListaProductos()
     {
-        Producto p = new Producto()
+        Lego p = new Lego()
         {
-            codigo = "2121213",
-            descripcion = "Cod Ejemplo",
-            cantidad = 4,
-            categoria = "Jardineria",
-            fecha = DateTime.Today
+            NumSet = "2121213",
+            Cantidad = 4,
+            Categoria = "Jardineria",
+            Fecha = DateTime.Today
         };
-        Producto p2 = new Producto()
+        Lego p2 = new Lego()
         {
-            codigo = "2121214",
-            descripcion = "Cod Ejemplo 2",
-            cantidad = 14,
-            categoria = "Hogar",
-            fecha = DateTime.Today
+            NumSet = "2121214",
+            Cantidad = 14,
+            Categoria = "Hogar",
+            Fecha = DateTime.Today
+        };
+        Lego p3 = new Lego()
+        {
+            NumSet = "2121214",
+            Cantidad = 14,
+            Categoria = "Hogar",
+            Fecha = DateTime.Today
+        };
+        Lego p4 = new Lego()
+        {
+            NumSet = "2121214",
+            Cantidad = 14,
+            Categoria = "Hogar",
+            Fecha = DateTime.Today
         };
         ListaProductos.Add(p);
         ListaProductos.Add(p2);
+        ListaProductos.Add(p3);
+        ListaProductos.Add(p4);
     }
 
     [RelayCommand]
@@ -73,5 +90,10 @@ public partial class MainListProductModel : ViewModelBase
         EliminarProducto eliminar = new EliminarProducto();
         eliminar.DataContext = new MainEditarProductoModel();
         DialogHost.Show(eliminar,"eliminar");
+    }
+    
+    public async void CargarListaLegos()
+    {
+        ListaLegos = await new DBService().ObtenerLegos();
     }
 }

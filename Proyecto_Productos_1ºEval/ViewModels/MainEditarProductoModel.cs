@@ -8,7 +8,7 @@ namespace Proyecto_Productos_1ºEval.ViewModels;
 public partial class MainEditarProductoModel: ViewModelBase
 {
     [ObservableProperty]
-    private Producto producto = new();
+    private Lego _lego = new();
     
     [RelayCommand]
     public void CerrarEditar()

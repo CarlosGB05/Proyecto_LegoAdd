@@ -3,43 +3,86 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Proyecto_Productos_1ºEval.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles" 
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
              x:Class="Proyecto_Productos_1ºEval.Views.CreateProductView"
-             x:DataType="vm:MainCreateProductModel">
+             x:DataType="vm:MainCreateProductModel" Width="1280" Height="720">
     <Design.DataContext>
         <vm:MainCreateProductModel/>
     </Design.DataContext>
     
-    <StackPanel>
-        <TextBlock Text="Crear Nuevo Producto" Margin="20"></TextBlock>
-        
-        <StackPanel Margin="20" HorizontalAlignment="Center" 
-                    Background="Aqua" Width="300">
-            <TextBlock Text="Codigo de Barras"/>
-            <TextBox Text="{Binding Producto.codigo}" Width="200"/>
-            <TextBlock Text="Descripcion Producto"/>
-            <TextBox Text="{Binding Producto.descripcion}" 
-                     Width="200"/>
-            <TextBlock Text="Cantidad"/>
-            <NumericUpDown Text="Cantidad" Width="200" 
-                           Value="{Binding Producto.cantidad}"/>
-            <TextBlock Text="Categoria"/>
-            <ComboBox Width="200" SelectedItem="{Binding Producto.categoria}"
-                ItemsSource="{Binding Categoria}"></ComboBox>
-            <TextBlock Text="Fecha"/>
-            <CalendarDatePicker Width="200"
-                SelectedDate="{Binding Producto.fecha}"/>
-            <TextBlock Text="Disponible"/>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Source="avares://Proyecto_Productos_1ºEval/Assets/fondo_crear.jpg"
+                        Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid RowDefinitions="100,*,200" Width="550" Height="680"
+              HorizontalAlignment="Center" Background="White">
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="Crear Nuevo Set Lego" Margin="25"
+                           HorizontalAlignment="Center" FontSize="38"/>
+            </StackPanel>
             
-            <TextBlock Margin="20" FontSize="15"
-                Text="{Binding Mensaje}"/>
-            <Button Content="Aceptar" 
-                    Command="{Binding CrearProductoCommand}"/>
-            <Button Content="Cancelar"
-                    Command="{Binding NavegarBienvenidaCommand}"/>
-            <Button Content="Ver Lista Producto" 
-                    Command="{Binding NavegarListaCommand}"/>
-        </StackPanel>
-    </StackPanel>
+        
+            <StackPanel HorizontalAlignment="Center" Width="500" Grid.Row="1" 
+                        Background="Aquamarine">
+                <!-- Añadir Num Set -->
+                <TextBox UseFloatingWatermark="True" Watermark="Ej: 75192" 
+                         p1:TextFieldAssist.Label="Numero Set" Margin="10,0,10,10"
+                         Text="{Binding Lego.NumSet}" 
+                         HorizontalAlignment="Center" Width="300" FontSize="20"/>
+                <!-- Añadir Nombre -->
+                <TextBox UseFloatingWatermark="True" Watermark="Ej: 75192" 
+                         p1:TextFieldAssist.Label="Nombre del Set" Margin="10,0,10,10"
+                         Text="{Binding Lego.Nombre}" 
+                         HorizontalAlignment="Center" Width="300" FontSize="20"/>
+                <!-- Añadir Categoria -->
+                <ComboBox Theme="{StaticResource MaterialOutlineComboBox}" 
+                          p1:ComboBoxAssist.Label="Categoria" Width="300" Margin="10"
+                          SelectedItem="{Binding Lego.Categoria}"
+                          ItemsSource="{Binding Categoria}"/>
+                <!-- Añadir Cantidad -->
+                <NumericUpDown Watermark="Indica la cantidad piezas..." 
+                               p1:TextFieldAssist.Hints="Cantidad Piezas" FontSize="20"
+                               p1:TextFieldAssist.Label="Cool label" Width="300" Margin="10"
+                               Value="{Binding Lego.Cantidad}"/>
+                <!-- Añadir Fecha -->
+                <DatePicker Name="DatePicker1" p1:TextFieldAssist.Label="Fecha Salida Set" 
+                            SelectedDate="{Binding Lego.Fecha}"
+                            Width="300" Margin="10"/> 
+                <!-- Añadir Disponibilidad -->
+                <ToggleSwitch Content="    ¿Esta Disponible?" 
+                              IsChecked="{Binding Lego.Disponible}" Classes="blue" 
+                              HorizontalAlignment="Center" Margin="10" FontSize="20"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="2">
+                <TextBlock Margin="15,15,15,-25" FontSize="23"
+                           Text="{Binding Mensaje}"
+                           Height="50" Foreground="Red"
+                           HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Theme="{StaticResource MaterialOutlineButton}" 
+                            Content="Crear Set Lego" CornerRadius="16"
+                            Classes="light" ToolTip.Tip="Pulsa Aquí para crearlo"
+                            FontSize="20" Height="50" Width="200"
+                            Command="{Binding CrearLegoCommand}"
+                            HorizontalAlignment="Center" Margin="15,15,15,5"/>
+                    <Button Theme="{StaticResource MaterialOutlineButton}" 
+                            Content="Cancelar Set Lego" CornerRadius="16"
+                            Classes="light" ToolTip.Tip="Pulsa Aquí para cancelarlo"
+                            FontSize="20" Height="50" Width="200"
+                            Command="{Binding }"
+                            HorizontalAlignment="Center" Margin="15,15,15,5"/>
+                </StackPanel>
+                <Button Theme="{StaticResource MaterialOutlineButton}" 
+                    Content="Ver Lista Legos" CornerRadius="16"
+                    Classes="light" ToolTip.Tip="Pulsa Aquí para cancelarlo"
+                    FontSize="20" Height="50" Width="200"
+                    Command="{Binding NavegarListaCommand}"
+                    HorizontalAlignment="Center" Margin="15,10,15,15"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
     
 </UserControl>

@@ -23,23 +23,16 @@
                      Theme="{StaticResource OutlineTextBox}" 
                      assists:TextFieldAssist.Label="Codigo" 
                      assists:TextFieldAssist.Hints="{StaticResource TextFieldTip1}" 
-                     Text="{Binding Producto.codigo}" Width="240"
+                     Text="{Binding Lego.NumSet}" Width="240"
                      Watermark="Escribe el Codigo..." Margin="10"/>
-            
-            <TextBox UseFloatingWatermark="True" Classes="outline" 
-                     Theme="{StaticResource OutlineTextBox}" 
-                     assists:TextFieldAssist.Label="Descripcion" 
-                     assists:TextFieldAssist.Hints="{StaticResource TextFieldTip1}" 
-                     Text="{Binding Producto.descripcion}" Width="240"
-                     Watermark="Escribe una descripcion..." Margin="10"/>
             
             <NumericUpDown Watermark="Enter text" p1:TextFieldAssist.Hints="Here is the hint" 
                            p1:TextFieldAssist.Label="Cool label" Width="240" Margin="10"
-                           Value="{Binding Producto.cantidad}"/>
+                           Value="{Binding Lego.Cantidad}"/>
             
             <ComboBox PlaceholderText="Categoria" Width="240" Margin="10"
                       HorizontalAlignment="Center"
-                      SelectedItem="{Binding Producto.categoria}">
+                      SelectedItem="{Binding Lego.Categoria}">
                 <ComboBoxItem>Limpieza</ComboBoxItem>
                 <ComboBoxItem>Hogar</ComboBoxItem>
                 <ComboBoxItem>Jardineria</ComboBoxItem>
@@ -48,12 +41,12 @@
             </ComboBox>
             
             <DatePicker Name="DatePicker2" HorizontalAlignment="Center"
-                        SelectedDate="{Binding Producto.fecha}" 
+                        SelectedDate="{Binding Lego.Fecha}" 
                         assists:DatePickerAssist.DateTimeFormat="yyyy-MM-dd"
                         Width="250" Margin="10"/>
             
             <ToggleSwitch Content="booleano pensar" 
-                          IsChecked="{Binding Producto.disponible}"
+                          IsChecked="{Binding Lego.Disponible}"
                           HorizontalAlignment="Center" Margin="10"/>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

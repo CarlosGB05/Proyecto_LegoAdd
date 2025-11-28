@@ -5,19 +5,15 @@
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
              xmlns:vm="clr-namespace:Proyecto_Productos_1ºEval.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
              x:Class="Proyecto_Productos_1ºEval.Views.ListProductView"
-             x:DataType="vm:MainListProductModel">
+             x:DataType="vm:MainListProductModel" Width="1280" Height="720">
     <Design.DataContext>
         <vm:MainListProductModel/>
     </Design.DataContext>
     
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="600"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        
         <dialogHostAvalonia:DialogHost Identifier="editar"
                                        CloseOnClickAway="True"
                                        ZIndex="1"
@@ -31,39 +27,86 @@
             <dialogHostAvalonia:DialogHost.Content/>
         </dialogHostAvalonia:DialogHost>
         
-        <StackPanel Grid.Column="0" HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            <TextBlock Text="Lista Todos los Productos" Margin="25"
-                       HorizontalAlignment="Center"/>
-            
-            <ListBox Name="ListaProductoBox"
-                     ItemsSource="{Binding ListaProductos}" Width="550" Height="250">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Image Width="150" Height="150"
-                                   asyncImageLoader:ImageLoader.Source="https://cdn-icons-png.flaticon.com/512/1311/1311467.png"/>
-                            <TextBlock Text="{Binding codigo}"/>
-                            <TextBlock Text="{Binding descripcion}"/>
-                            <TextBlock Text="{Binding cantidad}"/>
-                            <TextBlock Text="{Binding categoria}"/>
-                            <TextBlock Text="{Binding fecha}"/>
+        <Grid.Background>
+            <ImageBrush Source="avares://Proyecto_Productos_1ºEval/Assets/fondo_lista.jpg"
+                        Stretch="UniformToFill"/>
+        </Grid.Background>
+        
+        <Grid RowDefinitions="100,*" Width="850" Background="White">
+            <StackPanel Grid.Row="0" Background="Yellow">
+                <TextBlock Text="Lista Sets Lego" Margin="25,35,25,25"
+                           HorizontalAlignment="Center" FontSize="38"
+                           Foreground="Black"/>
+            </StackPanel>
+            <Grid Grid.Row="1" ColumnDefinitions="*,350">
+                <StackPanel Grid.Column="0" HorizontalAlignment="Center"
+                        VerticalAlignment="Center" Background="Red">
+                    <ListBox Name="ListaProductoBox" Background="Aquamarine"
+                             ItemsSource="{Binding ListaLegos}" 
+                             Width="480" Height="550" HorizontalAlignment="Center"
+                             SelectionMode="Toggle">
+                        
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        
+                        <ListBox.Styles>
+                            <Style Selector="ListBoxItem:selected">
+                                <Setter Property="Background" Value="LightSteelBlue" />
+                                <Setter Property="BorderBrush" Value="Black" />
+                                <Setter Property="BorderThickness" Value="2" />
+                            </Style>
+                        </ListBox.Styles>
+                        
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <controls:Card Width="200" Height="200" HorizontalAlignment="Center" Margin="10">
+                                    <StackPanel Orientation="Vertical" Background="White"
+                                                HorizontalAlignment="Center">
+                                        <Image Width="90" Height="90" Margin="15" 
+                                               asyncImageLoader:ImageLoader.Source="avares://Proyecto_Productos_1ºEval/Assets/icono_lego.png"/>
+                                        <TextBlock Text="{Binding NumSet}" FontSize="20"
+                                                   HorizontalAlignment="Center" Margin="5"/>
+                                        <TextBlock Text="{Binding Categoria}" FontSize="20"
+                                                   HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </controls:Card>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Border Width="300" BorderBrush="Cyan" BorderThickness="10"
+                            CornerRadius="25" Height="260" Background="White"
+                            Margin="20,10,40,10">
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Center"
+                                    Width="280" VerticalAlignment="Center">
+                            <Button Theme="{StaticResource MaterialOutlineButton}" 
+                                    Content="Editar Set Lego" CornerRadius="16"
+                                    Classes="light" ToolTip.Tip="Pulsa Aquí para editarlo"
+                                    FontSize="23" Height="55" Width="230"
+                                    Command="{Binding EditarProductoCommand}"
+                                    HorizontalAlignment="Center" Margin="15,15,15,10"/>
+                            <Button Theme="{StaticResource MaterialOutlineButton}" 
+                                    Content="Eliminar Set Lego" CornerRadius="16"
+                                    Classes="light" ToolTip.Tip="Pulsa Aquí para eliminarlo"
+                                    FontSize="23" Height="55" Width="230"
+                                    Command="{Binding EliminarProductoCommand}"
+                                    HorizontalAlignment="Center" Margin="10"/>
+                            <Button Theme="{StaticResource MaterialOutlineButton}" 
+                                    Content="Volver Inicio" CornerRadius="16"
+                                    Classes="light" ToolTip.Tip="Pulsa Aquí para ir al Inicio"
+                                    FontSize="23" Height="55" Width="230"
+                                    Command="{Binding NavegarBienvenidaCommand}"
+                                    HorizontalAlignment="Center" Margin="15,10,15,15"/>
                         </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </StackPanel>
-        
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            <Button Content="Volver Inicio" 
-                    Command="{Binding NavegarBienvenidaCommand}"/>
-            <Button Content="Editar Producto" 
-                    Command="{Binding EditarProductoCommand}"/>
-            <Button Content="Eliminar Producto" 
-                    Command="{Binding EliminarProductoCommand}"/>
-        </StackPanel>
-        
+                    </Border>
+                </StackPanel>
+            </Grid>
+            
+        </Grid>
     </Grid>
     
 </UserControl>

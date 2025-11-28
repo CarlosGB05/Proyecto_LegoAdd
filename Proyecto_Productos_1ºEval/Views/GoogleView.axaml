@@ -3,12 +3,79 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Proyecto_Productos_1ºEval.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
              x:Class="Proyecto_Productos_1ºEval.Views.GoogleView"
-             x:DataType="vm:MainGoogleModel">
+             x:DataType="vm:MainGoogleViewModel" Width="1280" Height="720">
     <Design.DataContext>
-        <vm:MainGoogleModel />
+        <vm:MainGoogleViewModel />
     </Design.DataContext>
     
-    <TextBlock Text="Iniciar Sesion"/>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Source="avares://Proyecto_Productos_1ºEval/Assets/fondo_google.jpeg"
+                        Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid RowDefinitions="70,*,80" Width="550" Height="550"
+              Background="White">
+            <StackPanel Grid.Row="0" Width="550"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="Iniciar Sesion" HorizontalAlignment="Center"
+                           FontSize="27" Margin="10,30,10,10"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Width="550"
+                        HorizontalAlignment="Center">
+                <ListBox Name="listLegos" Width="500" Height="350" Margin="20,20,20,5"
+                         ItemsSource="{Binding ListaUsuarios}"
+                         HorizontalAlignment="Center" SelectionMode="Toggle" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center" LineSpacing="20" ItemSpacing="20"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ListBox.Styles>
+                        <Style Selector="ListBoxItem:selected">
+                            <Setter Property="Background" Value="LightSteelBlue" />
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="2" />
+                        </Style>
+                    </ListBox.Styles>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Width="500" Margin="10"
+                                        HorizontalAlignment="Center">
+                                <Image Width="100" Height="100" Margin="30,10"
+                                       HorizontalAlignment="Center"
+                                       asyncImageLoader:ImageLoader.Source="{Binding Imagen}"/>
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Email}" Margin="5"
+                                               FontSize="20"/>
+                                    <TextBlock Text="{Binding Nombre}" Margin="5"
+                                               FontSize="20"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock HorizontalAlignment="Center" Text="Para poder Iniciar Sesión directamente, Pulse su Usuario"/>
+            </StackPanel>
+        
+            <StackPanel Grid.Row="2" Width="550" Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Theme="{StaticResource MaterialOutlineButton}" 
+                        Content="Registrar Usuario" CornerRadius="16"
+                        Classes="light" ToolTip.Tip="Pulsa Aquí para Registrarte"
+                        FontSize="20" Height="50" Width="200" Margin="55,15,10,15"
+                        Command="{Binding RegistroUsuarioCommand}"/>
+                <Button Theme="{StaticResource MaterialOutlineButton}" 
+                        Content="Iniciar Sesión" CornerRadius="16"
+                        Classes="light" ToolTip.Tip="Pulsa Aquí para Iniciar Sesión"
+                        FontSize="20" Height="50" Width="200" Margin="15"
+                        Command="{Binding LoginUsuarioCommand}"
+                        CommandParameter="{Binding ElementName=listLegos,Path=SelectedItem}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+    
 </UserControl>

@@ -32,7 +32,7 @@
                          Text="{Binding Lego.NumSet}" 
                          HorizontalAlignment="Center" Width="300" FontSize="20"/>
                 <!-- Añadir Nombre -->
-                <TextBox UseFloatingWatermark="True" Watermark="Ej: 75192" 
+                <TextBox UseFloatingWatermark="True" Watermark="Ej: Spiderman vs Venom" 
                          p1:TextFieldAssist.Label="Nombre del Set" Margin="10,0,10,10"
                          Text="{Binding Lego.Nombre}" 
                          HorizontalAlignment="Center" Width="300" FontSize="20"/>

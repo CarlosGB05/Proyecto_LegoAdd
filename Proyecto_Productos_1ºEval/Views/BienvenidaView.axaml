@@ -3,18 +3,57 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Proyecto_Productos_1ºEval.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="760"
              x:Class="Proyecto_Productos_1ºEval.Views.BienvenidaView"
-             x:DataType="vm:MainBienvenidaModel" Width="1280" Height="720">
+             x:DataType="vm:MainBienvenidaModel" Width="1280" Height="760">
     <Design.DataContext>
         <vm:MainGoogleViewModel />
     </Design.DataContext>
-    <StackPanel>
-        <TextBlock Text="Bienvenido a mi aplicacion"/>
-        <Button Content="Crear Nuevo Producto" 
-                Command="{Binding NavegarCrearCommand}"/>
-        <Button Content="Ver Lista Producto" 
-                Command="{Binding NavegarListaCommand}"/>
-    </StackPanel>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Source="avares://Proyecto_Productos_1ºEval/Assets/fondo_inicio.jpg"
+                        Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid Width="700" Height="500" Background="White"
+              RowDefinitions="100,*,120">
+            <StackPanel Grid.Row="0" Background="Yellow">
+                <TextBlock Text="Bienvenido a mi Aplicación" HorizontalAlignment="Center"
+                           FontSize="38" Margin="26"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                <TextBlock Text="Esta aplicacion se dedica a crear los sets de lego"
+                           FontSize="20" Margin="2" HorizontalAlignment="Center"/>
+                <TextBlock Text="que saldran dentro de poco o ya han salido pero no lo sabias"
+                           FontSize="20" Margin="2" HorizontalAlignment="Center"/>
+                <TextBlock Text="Y en caso de equivocarte en algun set ..."
+                           FontSize="20" Margin="2" HorizontalAlignment="Center"/>
+                <TextBlock Text="No te procupes"
+                           FontSize="30" Margin="5" HorizontalAlignment="Center"/>
+                <TextBlock Text="Porque podras editarlo a tus gustos sin problemas o si no te convence,"
+                           FontSize="20" Margin="2" HorizontalAlignment="Center"/>
+                <TextBlock Text="tambien se puede eliminar ese set"
+                           FontSize="20" Margin="2" HorizontalAlignment="Center"/>
+                <TextBlock Text="Asi que a disfrutar CREANDO MUNDOS DE IDEAS"
+                           FontSize="20" Margin="2" HorizontalAlignment="Center"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Theme="{StaticResource MaterialOutlineButton}" 
+                        Content="Crear Nuevo Lego" CornerRadius="16"
+                        Classes="light" ToolTip.Tip="Pulsa Aquí para Crear"
+                        FontSize="20" Height="50" Width="200"
+                        Command="{Binding NavegarCrearCommand}"
+                        HorizontalAlignment="Center" Margin="15,15,15,45"/>
+                <Button Theme="{StaticResource MaterialOutlineButton}" 
+                        Content="Ver Lista Legos" CornerRadius="16"
+                        Classes="light" ToolTip.Tip="Pulsa Aquí para Ver Sets"
+                        FontSize="20" Height="50" Width="200"
+                        Command="{Binding NavegarListaCommand}"
+                        HorizontalAlignment="Center" Margin="15,15,15,45"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+    
     
 </UserControl>

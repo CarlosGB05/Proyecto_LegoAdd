@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Proyecto_Productos_1ºEval.ViewModels"
              xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles" 
-             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="760"
              x:Class="Proyecto_Productos_1ºEval.Views.CreateProductView"
-             x:DataType="vm:MainCreateProductModel" Width="1280" Height="720">
+             x:DataType="vm:MainCreateProductModel" Width="1280" Height="760">
     <Design.DataContext>
         <vm:MainCreateProductModel/>
     </Design.DataContext>
@@ -16,16 +16,15 @@
             <ImageBrush Source="avares://Proyecto_Productos_1ºEval/Assets/fondo_crear.jpg"
                         Stretch="UniformToFill"/>
         </Grid.Background>
-        <Grid RowDefinitions="100,*,200" Width="550" Height="680"
+        <Grid RowDefinitions="90,*,200" Width="500" Height="720"
               HorizontalAlignment="Center" Background="White">
-            <StackPanel Grid.Row="0">
-                <TextBlock Text="Crear Nuevo Set Lego" Margin="25"
-                           HorizontalAlignment="Center" FontSize="38"/>
+            <StackPanel Grid.Row="0" Background="Yellow">
+                <TextBlock Text="Crear Nuevo Set Lego" Margin="20"
+                           HorizontalAlignment="Center" FontSize="38"
+                           FontFamily="Roboto"/>
             </StackPanel>
             
-        
-            <StackPanel HorizontalAlignment="Center" Width="500" Grid.Row="1" 
-                        Background="Aquamarine">
+            <StackPanel HorizontalAlignment="Center" Width="500" Grid.Row="1">
                 <!-- Añadir Num Set -->
                 <TextBox UseFloatingWatermark="True" Watermark="Ej: 75192" 
                          p1:TextFieldAssist.Label="Numero Set" Margin="10,0,10,10"
@@ -35,7 +34,7 @@
                 <TextBox UseFloatingWatermark="True" Watermark="Ej:  Spiderman vs Venom" 
                          p1:TextFieldAssist.Label="Nombre del Set" Margin="10,0,10,10"
                          Text="{Binding Lego.Nombre}" 
-                         HorizontalAlignment="Center" Width="300" FontSize="20"/>
+                         HorizontalAlignment="Center" Width="300" FontSize="16"/>
                 <!-- Añadir Categoria -->
                 <ComboBox Theme="{StaticResource MaterialOutlineComboBox}" 
                           p1:ComboBoxAssist.Label="Categoria" Width="300" Margin="10"
@@ -51,13 +50,15 @@
                             SelectedDate="{Binding Lego.Fecha}"
                             Width="300" Margin="10"/> 
                 <!-- Añadir Disponibilidad -->
-                <ToggleSwitch Content="    ¿Esta Disponible?" 
+                <ToggleSwitch Content="    ¿Esta Disponible?"
                               IsChecked="{Binding Lego.Disponible}" Classes="blue" 
                               HorizontalAlignment="Center" Margin="10" FontSize="20"/>
             </StackPanel>
             
+           
+            
             <StackPanel Grid.Row="2">
-                <TextBlock Margin="15,15,15,-25" FontSize="23"
+                <TextBlock Margin="10,8,10,-26" FontSize="20"
                            Text="{Binding Mensaje}"
                            Height="50" Foreground="Red"
                            HorizontalAlignment="Center"/>
@@ -72,7 +73,7 @@
                             Content="Cancelar Set Lego" CornerRadius="16"
                             Classes="light" ToolTip.Tip="Pulsa Aquí para cancelarlo"
                             FontSize="20" Height="50" Width="200"
-                            Command="{Binding }"
+                            Command="{Binding CancelarLegoCommand}"
                             HorizontalAlignment="Center" Margin="15,15,15,5"/>
                 </StackPanel>
                 <Button Theme="{StaticResource MaterialOutlineButton}" 
@@ -80,7 +81,7 @@
                     Classes="light" ToolTip.Tip="Pulsa Aquí para cancelarlo"
                     FontSize="20" Height="50" Width="200"
                     Command="{Binding NavegarListaCommand}"
-                    HorizontalAlignment="Center" Margin="15,10,15,15"/>
+                    HorizontalAlignment="Center" Margin="15,15,15,5"/>
             </StackPanel>
         </Grid>
     </Grid>

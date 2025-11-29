@@ -15,6 +15,7 @@
     </Application.DataTemplates>
 
     <Application.Styles>
+        <FluentTheme />
         <dialogHostAvalonia1:DialogHostStyles/>
         <styling1:FluentAvaloniaTheme/>
         <themes:MaterialTheme BaseTheme="Light" PrimaryColor="Cyan" SecondaryColor="Lime" />

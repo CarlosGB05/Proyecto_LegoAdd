@@ -5,9 +5,9 @@
              xmlns:vm="clr-namespace:Proyecto_Productos_1ºEval.ViewModels"
              xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
-             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="760"
              x:Class="Proyecto_Productos_1ºEval.Views.GoogleView"
-             x:DataType="vm:MainGoogleViewModel" Width="1280" Height="720">
+             x:DataType="vm:MainGoogleViewModel" Width="1280" Height="760">
     <Design.DataContext>
         <vm:MainGoogleViewModel />
     </Design.DataContext>
@@ -22,7 +22,7 @@
             <StackPanel Grid.Row="0" Width="550"
                         HorizontalAlignment="Center">
                 <TextBlock Text="Iniciar Sesion" HorizontalAlignment="Center"
-                           FontSize="27" Margin="10,30,10,10"/>
+                           FontSize="38" Margin="10,30,10,10"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Width="550"
                         HorizontalAlignment="Center">
@@ -58,7 +58,8 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <TextBlock HorizontalAlignment="Center" Text="Para poder Iniciar Sesión directamente, Pulse su Usuario"/>
+                <TextBlock HorizontalAlignment="Center" 
+                           Text="Para poder Iniciar Sesión directamente, Pulse su Usuario"/>
             </StackPanel>
         
             <StackPanel Grid.Row="2" Width="550" Orientation="Horizontal"

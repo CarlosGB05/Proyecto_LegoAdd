@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Avalonia.Collections;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -15,12 +16,17 @@ public partial class MainListProductModel : ViewModelBase
     private NavigationService navegacionList;
     [ObservableProperty] private AvaloniaList<Lego> listaProductos = new();
     [ObservableProperty] private AvaloniaList<Lego> listaLegos = new();
+    [ObservableProperty] private Lego legoSeleccionado = new();
+    [ObservableProperty] private Lego legoEditar = new();
+    [ObservableProperty] private List<string> categoria;
+    [ObservableProperty] private bool verEditar = false;
 
     public MainListProductModel(NavigationService navegacion)
     {
         navegacionList = navegacion;
         CargarListaProductos();
         CargarListaLegos();
+        CargarCategorias();
     }
 
     public MainListProductModel()
@@ -75,6 +81,14 @@ public partial class MainListProductModel : ViewModelBase
     {
         navegacionList.NavigateTo("bienvenida");
     }
+    
+    public void CargarCategorias()
+    {
+        categoria = new List<string>()
+        {
+            "Star Wars","Marvel","Ninjago","Batman","Ideas","Speed Champions"
+        };
+    }
 
     [RelayCommand]
     public void EditarProducto()
@@ -95,5 +109,29 @@ public partial class MainListProductModel : ViewModelBase
     public async void CargarListaLegos()
     {
         ListaLegos = await new DBService().ObtenerLegos();
+    }
+    
+    [RelayCommand]
+    public void CerrarEliminar()
+    {
+        DialogHost.Close("eliminar");
+    }
+    
+    [RelayCommand]
+    public void CerrarEditar()
+    {
+        DialogHost.Close("editar");
+    }
+
+    [RelayCommand]
+    public void CargarLegoSelec()
+    {
+        LegoEditar = LegoSeleccionado;
+    }
+    
+    [RelayCommand]
+    public void VerEditarDialog()
+    {
+        VerEditar = !VerEditar;
     }
 }

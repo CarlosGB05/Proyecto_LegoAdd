@@ -3,59 +3,71 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Proyecto_Productos_1ºEval.ViewModels"
-             xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
-             xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
              xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="600"
+             xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles" 
+             mc:Ignorable="d" d:DesignWidth="460" d:DesignHeight="660"
              x:Class="Proyecto_Productos_1ºEval.Views.Dialogs.EditarProducto"
-             x:DataType="vm:MainEditarProductoModel">
+             x:DataType="vm:MainListProductModel">
     <Design.DataContext>
-        <vm:MainEditarProductoModel/>
+        <vm:MainListProductModel/>
     </Design.DataContext>
     
-    <Grid>
-        <StackPanel>
-            <TextBlock Text="Editar Producto" HorizontalAlignment="Center"
-                       FontSize="40" Foreground="Aqua"
-                       Margin="10,15,10,10"/>
-            
-            <TextBox UseFloatingWatermark="True" Classes="outline" 
-                     Theme="{StaticResource OutlineTextBox}" 
-                     assists:TextFieldAssist.Label="Codigo" 
-                     assists:TextFieldAssist.Hints="{StaticResource TextFieldTip1}" 
-                     Text="{Binding Lego.NumSet}" Width="240"
-                     Watermark="Escribe el Codigo..." Margin="10"/>
-            
-            <NumericUpDown Watermark="Enter text" p1:TextFieldAssist.Hints="Here is the hint" 
-                           p1:TextFieldAssist.Label="Cool label" Width="240" Margin="10"
-                           Value="{Binding Lego.Cantidad}"/>
-            
-            <ComboBox PlaceholderText="Categoria" Width="240" Margin="10"
-                      HorizontalAlignment="Center"
-                      SelectedItem="{Binding Lego.Categoria}">
-                <ComboBoxItem>Limpieza</ComboBoxItem>
-                <ComboBoxItem>Hogar</ComboBoxItem>
-                <ComboBoxItem>Jardineria</ComboBoxItem>
-                <ComboBoxItem>Informatica</ComboBoxItem>
-                <ComboBoxItem>Alimentacion</ComboBoxItem>
-            </ComboBox>
-            
-            <DatePicker Name="DatePicker2" HorizontalAlignment="Center"
-                        SelectedDate="{Binding Lego.Fecha}" 
-                        assists:DatePickerAssist.DateTimeFormat="yyyy-MM-dd"
-                        Width="250" Margin="10"/>
-            
-            <ToggleSwitch Content="booleano pensar" 
-                          IsChecked="{Binding Lego.Disponible}"
-                          HorizontalAlignment="Center" Margin="10"/>
-            
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Actualizar" Width="120" Margin="10"
-                        Command="{Binding CerrarEditarCommand}"/>
-            
-                <Button Content="Cancelar" Width="120" Margin="10"
-                        Command="{Binding CerrarEditarCommand}"/>
-            </StackPanel>
+    <Grid RowDefinitions="90,*,100">
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Editar Set Lego" HorizontalAlignment="Center"
+                       FontSize="38" Margin="20,20,20,5"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1">
+            <!-- Añadir Num Set -->
+            <TextBox UseFloatingWatermark="True" Watermark="Ej: 75192" 
+                     p1:TextFieldAssist.Label="Numero Set" Margin="10,0,10,10"
+                     Text="{Binding LegoSeleccionado.NumSet}" 
+                     HorizontalAlignment="Center" Width="300" FontSize="20"/>
+            <!-- Añadir Nombre -->
+            <TextBox UseFloatingWatermark="True" Watermark="Ej:  Spiderman vs Venom" 
+                     p1:TextFieldAssist.Label="Nombre del Set" Margin="10,0,10,10"
+                     Text="{Binding LegoSeleccionado.Nombre}" 
+                     HorizontalAlignment="Center" Width="300" FontSize="16"/>
+            <!-- Añadir Categoria -->
+            <ComboBox Theme="{StaticResource MaterialOutlineComboBox}" 
+                      p1:ComboBoxAssist.Label="Categoria" Width="300" Margin="10"
+                      SelectedItem="{Binding LegoSeleccionado.Categoria}"
+                      ItemsSource="{Binding Categoria}"/>
+            <!-- Añadir Cantidad -->
+            <NumericUpDown Watermark="Indica la cantidad piezas..." 
+                           p1:TextFieldAssist.Hints="Cantidad Piezas" FontSize="20"
+                           p1:TextFieldAssist.Label="Cool label" Width="300" Margin="10"
+                           Value="{Binding LegoSeleccionado.Cantidad}"/>
+            <!-- Añadir Fecha -->
+            <DatePicker Name="DatePicker1" p1:TextFieldAssist.Label="Fecha Salida Set" 
+                        SelectedDate="{Binding LegoSeleccionado.Fecha}"
+                        Width="300" Margin="10"/> 
+            <!-- Añadir Disponibilidad -->
+            <ToggleSwitch Content="    ¿Esta Disponible?"
+                          IsChecked="{Binding LegoSeleccionado.Disponible}" Classes="blue" 
+                          HorizontalAlignment="Center" Margin="10" FontSize="20"/>
+            <!-- Texto Error -->
+            <TextBlock Margin="10" FontSize="20"
+                       Text="ERROR"
+                       Height="50" Foreground="Red"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal"
+                    VerticalAlignment="Center">
+            <Button Theme="{StaticResource MaterialOutlineButton}" 
+                    Content="Actualizar Set" CornerRadius="16"
+                    Classes="light" ToolTip.Tip="Pulsa Aquí para crearlo"
+                    FontSize="20" Height="50" Width="200"
+                    Command="{Binding CerrarEditarCommand}"
+                    HorizontalAlignment="Center" Margin="15"/>
+            <Button Theme="{StaticResource MaterialOutlineButton}" 
+                    Content="Cancelar Editar" CornerRadius="16"
+                    Classes="light" ToolTip.Tip="Pulsa Aquí para cancelarlo"
+                    FontSize="20" Height="50" Width="200"
+                    Command="{Binding CerrarEditarCommand}"
+                    HorizontalAlignment="Center" Margin="15"/>
         </StackPanel>
     </Grid>
     

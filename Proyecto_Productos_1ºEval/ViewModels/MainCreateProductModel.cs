@@ -78,5 +78,12 @@ public partial class MainCreateProductModel : ViewModelBase
         }
             
     }
-    
+
+    [RelayCommand]
+    public void CancelarLego()
+    {
+        Lego =  new Lego();
+        Mensaje = "Set Lego Cancelado";
+    }
+
 }

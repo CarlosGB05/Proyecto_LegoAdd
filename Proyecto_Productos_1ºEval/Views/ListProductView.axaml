@@ -7,6 +7,7 @@
              xmlns:vm="clr-namespace:Proyecto_Productos_1ºEval.ViewModels"
              xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles" 
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="760"
              x:Class="Proyecto_Productos_1ºEval.Views.ListProductView"
              x:DataType="vm:MainListProductModel" Width="1280" Height="760">
@@ -20,54 +21,102 @@
                                        Background="Transparent" HorizontalAlignment="Center" 
                                        VerticalAlignment="Center">
             <dialogHostAvalonia:DialogHost.DialogContent>
-                <Grid Background="White" Width="460" Height="660">
-                    <StackPanel>
-                        <!-- Añadir Num Set -->
-                        <TextBox UseFloatingWatermark="True" Watermark="Ej: 75192" 
-                                 p1:TextFieldAssist.Label="Numero Set" Margin="10,0,10,10"
-                                 Text="{Binding LegoSeleccionado.NumSet}" 
-                                 HorizontalAlignment="Center" Width="300" FontSize="20"/>
-                        <!-- Añadir Nombre -->
-                        <TextBox UseFloatingWatermark="True" Watermark="Ej:  Spiderman vs Venom" 
-                                 p1:TextFieldAssist.Label="Nombre del Set" Margin="10,0,10,10"
-                                 Text="{Binding LegoSeleccionado.Nombre}" 
-                                 HorizontalAlignment="Center" Width="300" FontSize="16"/>
-                        <!-- Añadir Categoria -->
-                        <ComboBox Theme="{StaticResource MaterialOutlineComboBox}" 
-                                  p1:ComboBoxAssist.Label="Categoria" Width="300" Margin="10"
-                                  SelectedItem="{Binding LegoSeleccionado.Categoria}"
-                                  ItemsSource="{Binding Categoria}"/>
-                        <!-- Añadir Cantidad -->
-                        <NumericUpDown Watermark="Indica la cantidad piezas..." 
-                                       p1:TextFieldAssist.Hints="Cantidad Piezas" FontSize="20"
-                                       p1:TextFieldAssist.Label="Cool label" Width="300" Margin="10"
-                                       Value="{Binding LegoSeleccionado.Cantidad}"/>
-                        <!-- Añadir Fecha -->
-                        <DatePicker Name="DatePicker1" p1:TextFieldAssist.Label="Fecha Salida Set" 
-                                    SelectedDate="{Binding LegoSeleccionado.Fecha}"
-                                    Width="300" Margin="10"/> 
-                        <!-- Añadir Disponibilidad -->
-                        <ToggleSwitch Content="    ¿Esta Disponible?"
-                                      IsChecked="{Binding LegoSeleccionado.Disponible}" Classes="blue" 
-                                      HorizontalAlignment="Center" Margin="10" FontSize="20"/>
-                        
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Content="Actualizar" Width="120" Margin="10"
-                                    Command="{Binding VerEditarDialogCommand}"/>
-                        
-                            <Button Content="Cancelar" Width="120" Margin="10"
-                                    Command="{Binding VerEditarDialogCommand}"/>
+                <Grid Background="Transparent" Width="1280" Height="760">
+                    <Grid RowDefinitions="90,*,100" Width="460" Height="630" Background="White">
+                        <StackPanel Grid.Row="0" Background="Yellow">
+                            <TextBlock Text="Editar Set Lego" HorizontalAlignment="Center"
+                                       FontSize="38" Margin="20,20,20,5"/>
                         </StackPanel>
-                    </StackPanel>
+                        
+                        <StackPanel Grid.Row="1">
+                            <!-- Añadir Num Set -->
+                            <TextBox UseFloatingWatermark="True" Watermark="Ej: 75192" 
+                                     p1:TextFieldAssist.Label="Numero Set" Margin="10,10,10,10"
+                                     Text="{Binding LegoSeleccionado.NumSet}" 
+                                     HorizontalAlignment="Center" Width="300" FontSize="20"/>
+                            <!-- Añadir Nombre -->
+                            <TextBox UseFloatingWatermark="True" Watermark="Ej:  Spiderman vs Venom" 
+                                     p1:TextFieldAssist.Label="Nombre del Set" Margin="10,0,10,10"
+                                     Text="{Binding LegoSeleccionado.Nombre}" 
+                                     HorizontalAlignment="Center" Width="300" FontSize="16"/>
+                            <!-- Añadir Categoria -->
+                            <ComboBox Theme="{StaticResource MaterialOutlineComboBox}" 
+                                      p1:ComboBoxAssist.Label="Categoria" Width="300" Margin="10"
+                                      SelectedItem="{Binding LegoSeleccionado.Categoria}"
+                                      ItemsSource="{Binding Categoria}"/>
+                            <!-- Añadir Cantidad -->
+                            <NumericUpDown Watermark="Indica la cantidad piezas..." 
+                                           p1:TextFieldAssist.Hints="Cantidad Piezas" FontSize="20"
+                                           p1:TextFieldAssist.Label="Cool label" Width="300" Margin="10"
+                                           Value="{Binding LegoSeleccionado.Cantidad}"/>
+                            <!-- Añadir Fecha -->
+                            <DatePicker Name="DatePicker1" p1:TextFieldAssist.Label="Fecha Salida Set" 
+                                        SelectedDate="{Binding LegoSeleccionado.Fecha}"
+                                        Width="300" Margin="10"/> 
+                            <!-- Añadir Disponibilidad -->
+                            <ToggleSwitch Content="    ¿Esta Disponible?"
+                                          IsChecked="{Binding LegoSeleccionado.Disponible}" Classes="blue" 
+                                          HorizontalAlignment="Center" Margin="10,10,10,5" FontSize="20"/>
+                            <!-- Texto Error -->
+                            <TextBlock FontSize="20"
+                                       Text="{Binding Mensaje}"
+                                       Height="50" Foreground="Red"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                            <Button Theme="{StaticResource MaterialOutlineButton}" 
+                                    Content="Actualizar Set" CornerRadius="16"
+                                    Classes="light" ToolTip.Tip="Pulsa Aquí para crearlo"
+                                    FontSize="20" Height="50" Width="200"
+                                    Command="{Binding ModificarLegoSelecCommand}"
+                                    HorizontalAlignment="Center" Margin="15"/>
+                            <Button Theme="{StaticResource MaterialOutlineButton}" 
+                                    Content="Cancelar Editar" CornerRadius="16"
+                                    Classes="light" ToolTip.Tip="Pulsa Aquí para cancelarlo"
+                                    FontSize="20" Height="50" Width="200"
+                                    Command="{Binding VerEditarDialogCommand}"
+                                    HorizontalAlignment="Center" Margin="15"/>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
             </dialogHostAvalonia:DialogHost.DialogContent>
         </dialogHostAvalonia:DialogHost>
         
-        <dialogHostAvalonia:DialogHost Identifier="eliminar"
-                                       CloseOnClickAway="True"
-                                       ZIndex="1"
-                                       Grid.ColumnSpan="2">
-            <dialogHostAvalonia:DialogHost.Content/>
+        <dialogHostAvalonia:DialogHost IsOpen="{Binding VerEliminar}"
+                                       CloseOnClickAway="True" ZIndex="1" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" Background="Transparent">
+            <dialogHostAvalonia:DialogHost.DialogContent>
+                <Grid Background="Transparent" Width="1280" Height="760">
+                    <Grid Grid.RowDefinitions="90,*,90" Width="500" Height="250" Background="White">
+                        <StackPanel Orientation="Horizontal" Background="Yellow"
+                        >
+                            <TextBlock Text="ATENCIÓN" Foreground="Black" 
+                                       Margin="150,25,0,0" FontSize="38"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1">
+                            <TextBlock Text="¿Deseas eliminar este Set de Lego?" 
+                                       HorizontalAlignment="Center" FontSize="25"
+                                       Margin="0,20,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                            <Button Theme="{StaticResource MaterialOutlineButton}" 
+                                    Content="Aceptar" CornerRadius="16"
+                                    Classes="light" ToolTip.Tip="Pulsa Aquí para eliminarlo"
+                                    FontSize="20" Height="50" Width="200"
+                                    Command="{Binding EliminarLegoSelecCommand}"
+                                    HorizontalAlignment="Center" Margin="15"/>
+                            <Button Theme="{StaticResource MaterialOutlineButton}" 
+                                    Content="Cancelar" CornerRadius="16"
+                                    Classes="light" ToolTip.Tip="Pulsa Aquí para cancelarlo"
+                                    FontSize="20" Height="50" Width="200"
+                                    Command="{Binding VerEliminarDialogCommand}"
+                                    HorizontalAlignment="Center" Margin="15"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </dialogHostAvalonia:DialogHost.DialogContent>
         </dialogHostAvalonia:DialogHost>
         
         <Grid.Background>
@@ -76,22 +125,19 @@
         </Grid.Background>
         
         <Grid RowDefinitions="100,*" Width="850" Background="White" Height="700">
-            <StackPanel Grid.Row="0">
-                <StackPanel.Background>
-                    <ImageBrush Source="avares://Proyecto_Productos_1ºEval/Assets/fondo_amarillo.jpg"></ImageBrush>
-                </StackPanel.Background>
-                <TextBlock Text="Lista Sets Lego" Margin="25,35,25,25"
+            <StackPanel Grid.Row="0" Background="Yellow">
+                <TextBlock Text="Lista Sets Lego" Margin="25,30,25,25"
                            HorizontalAlignment="Center" FontSize="38"
                            Foreground="Black"/>
             </StackPanel>
-            <Grid Grid.Row="1" ColumnDefinitions="*,350">
+            <Grid Grid.Row="1" ColumnDefinitions="*,340">
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center"
-                        VerticalAlignment="Center" Background="Red">
-                    <ListBox Name="ListaProductoBox" Background="Cyan"
+                        VerticalAlignment="Center">
+                    <ListBox Name="ListaProductoBox"
                              ItemsSource="{Binding ListaLegos}"
                              SelectedItem="{Binding LegoSeleccionado}"
                              Width="480" Height="550" HorizontalAlignment="Center"
-                             SelectionMode="Toggle">
+                             SelectionMode="Toggle" Margin="10,0,0,0">
                         
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -108,7 +154,7 @@
                         
                         <ListBox.Styles>
                             <Style Selector="ListBoxItem:selected">
-                                <Setter Property="Background" Value="LightSteelBlue" />
+                                <Setter Property="Background" Value="Aquamarine" />
                                 <Setter Property="BorderBrush" Value="Black" />
                                 <Setter Property="BorderThickness" Value="2" />
                             </Style>
@@ -131,12 +177,11 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </StackPanel>
+                
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding LegoSeleccionado.NumSet}"
-                               Foreground="Red"/>
                     <TextBlock HorizontalAlignment="Center" 
                                Text="Para poder Editar o Eliminar,"/>
-                    <TextBlock Text="seleccione cualquier set" HorizontalAlignment="Center"/>
+                    <TextBlock Text="seleccione cualquier Set" HorizontalAlignment="Center"/>
                     <Border Width="300" BorderBrush="Cyan" BorderThickness="10"
                             CornerRadius="25" Height="260" Background="White"
                             Margin="20,10,40,10">
@@ -146,13 +191,15 @@
                                     Content="Editar Set Lego" CornerRadius="16"
                                     Classes="light" ToolTip.Tip="Pulsa Aquí para editarlo"
                                     FontSize="23" Height="55" Width="230"
+                                    IsEnabled="{Binding BotonModificarLego}"
                                     Command="{Binding VerEditarDialogCommand}"
                                     HorizontalAlignment="Center" Margin="15,15,15,10"/>
                             <Button Theme="{StaticResource MaterialOutlineButton}" 
                                     Content="Eliminar Set Lego" CornerRadius="16"
                                     Classes="light" ToolTip.Tip="Pulsa Aquí para eliminarlo"
                                     FontSize="23" Height="55" Width="230"
-                                    Command="{Binding EliminarProductoCommand}"
+                                    IsEnabled="{Binding BotonEliminarLego}"
+                                    Command="{Binding VerEliminarDialogCommand}"
                                     HorizontalAlignment="Center" Margin="10"/>
                             <Button Theme="{StaticResource MaterialOutlineButton}" 
                                     Content="Volver Inicio" CornerRadius="16"

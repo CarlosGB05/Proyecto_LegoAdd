@@ -22,15 +22,15 @@
             </StackPanel>
             
             <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                <TextBlock Text="Esta aplicacion se dedica a crear los sets de lego"
+                <TextBlock Text="Esta aplicacion se dedica a crear los Sets de Lego"
                            FontSize="20" Margin="2" HorizontalAlignment="Center"/>
-                <TextBlock Text="que saldran dentro de poco o ya han salido pero no lo sabias"
+                <TextBlock Text="que saldrán dentro de poco o ya han salido pero no lo sabías"
                            FontSize="20" Margin="2" HorizontalAlignment="Center"/>
-                <TextBlock Text="Y en caso de equivocarte en algun set ..."
+                <TextBlock Text="Y en caso de equivocarte en algun Set ..."
                            FontSize="20" Margin="2" HorizontalAlignment="Center"/>
-                <TextBlock Text="No te procupes"
+                <TextBlock Text="NO TE PREOCUPES"
                            FontSize="30" Margin="5" HorizontalAlignment="Center"/>
-                <TextBlock Text="Porque podras editarlo a tus gustos sin problemas o si no te convence,"
+                <TextBlock Text="Porque podrás editarlo a tus gustos sin problemas o si no te convence,"
                            FontSize="20" Margin="2" HorizontalAlignment="Center"/>
                 <TextBlock Text="tambien se puede eliminar ese set"
                            FontSize="20" Margin="2" HorizontalAlignment="Center"/>
@@ -41,7 +41,7 @@
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Theme="{StaticResource MaterialOutlineButton}" 
                         Content="Crear Nuevo Lego" CornerRadius="16"
-                        Classes="light" ToolTip.Tip="Pulsa Aquí para Crear"
+                        Classes="light" ToolTip.Tip="Pulsa Aquí para Crear Sets"
                         FontSize="20" Height="50" Width="200"
                         Command="{Binding NavegarCrearCommand}"
                         HorizontalAlignment="Center" Margin="15,15,15,45"/>

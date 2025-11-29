@@ -13,6 +13,8 @@ public partial class MainGoogleViewModel : ViewModelBase
     private NavigationService navegacionGoogle;
     [ObservableProperty] private AvaloniaList<Usuario> listaUsuarios = new();
     [ObservableProperty] private string imagenURL;
+    [ObservableProperty] private bool botonIniciarSesion = false;
+    [ObservableProperty] private Usuario usuarioSeleccionado = new();
 
     public MainGoogleViewModel(NavigationService navegacion)
     {
@@ -60,6 +62,20 @@ public partial class MainGoogleViewModel : ViewModelBase
         {
             NavegarTienda();
         }
+    }
+    
+    [RelayCommand]
+    public void SeleccionUsuarioChanged()
+    {
+        if (UsuarioSeleccionado != null)
+        {
+            BotonIniciarSesion = true;
+        }
+        else
+        {
+            BotonIniciarSesion = false;
+        }
+        
     }
     
 }

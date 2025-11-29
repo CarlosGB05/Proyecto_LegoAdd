@@ -11,24 +11,36 @@
         <vm:MainListProductModel/>
     </Design.DataContext>
     
-    <Grid Grid.RowDefinitions="*,*,*" Background="Aqua" Width="500" Height="250">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBlock Text="ATENCIÓN" Foreground="White" Margin="0,25,0,0"
-                       HorizontalAlignment="Center" FontSize="30"/>
-            <avalonia:MaterialIcon Kind="Alert" Width="30"/>
-        </StackPanel>
-        <StackPanel Grid.Row="1">
-            <TextBlock Text="¿Deseas eliminar este producto?" 
-                       HorizontalAlignment="Center" FontSize="25"
-                       Margin="0,15,0,0"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
-            <Button Content="Aceptar" Width="150" Margin="0,0,20,20"
-                    Command="{Binding CerrarEliminarCommand}"/>
-            <Button Content="Cancelar" Width="150" Margin="0,0,20,20"
-                    Command="{Binding CerrarEliminarCommand}"/>
-        </StackPanel>
+    <Grid Background="Transparent" Width="1280" Height="760">
+        <Grid Grid.RowDefinitions="90,*,90" Width="500" Height="250" Background="White">
+            <StackPanel Orientation="Horizontal" Background="Yellow"
+                        >
+                <TextBlock Text="ATENCIÓN" Foreground="Black" 
+                           Margin="140,25,0,0" FontSize="38"/>
+                <avalonia:MaterialIcon Kind="Alert" Width="30"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Background="Aqua">
+                <TextBlock Text="¿Deseas eliminar este Set de Lego?" 
+                           HorizontalAlignment="Center" FontSize="25"
+                           Margin="0,20,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                <Button Theme="{StaticResource MaterialOutlineButton}" 
+                        Content="Aceptar" CornerRadius="16"
+                        Classes="light" ToolTip.Tip="Pulsa Aquí para eliminarlo"
+                        FontSize="20" Height="50" Width="200"
+                        Command="{Binding EliminarLegoSelecCommand}"
+                        HorizontalAlignment="Center" Margin="15"/>
+                <Button Theme="{StaticResource MaterialOutlineButton}" 
+                        Content="Cancelar" CornerRadius="16"
+                        Classes="light" ToolTip.Tip="Pulsa Aquí para cancelarlo"
+                        FontSize="20" Height="50" Width="200"
+                        Command="{Binding VerEliminarDialogCommand}"
+                        HorizontalAlignment="Center" Margin="15"/>
+            </StackPanel>
+        </Grid>
     </Grid>
+    
     
     
 </UserControl>

@@ -62,13 +62,17 @@ public partial class MainCreateProductModel : ViewModelBase
         {
             Mensaje = "Numero del Set Incorrecto";
         }
-        else if (Lego.Cantidad < 0)
+        else if (string.IsNullOrWhiteSpace(Lego.Nombre))
         {
-            Mensaje = "Numero Piezas Incorrecta";
+            Mensaje = "Nombre del Set Incorrecto";
         }
         else if (string.IsNullOrWhiteSpace(Lego.Categoria))
         {
-            Mensaje = "Categoria Incorrecta";
+            Mensaje = "Categoria del Set Incorrecto";
+        }
+        else if (Lego.Cantidad < 0)
+        {
+            Mensaje = "Numero de Piezas Incorrecta";
         }
         else
         {

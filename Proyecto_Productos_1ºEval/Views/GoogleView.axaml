@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:Proyecto_Productos_1ºEval.ViewModels"
              xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="760"
              x:Class="Proyecto_Productos_1ºEval.Views.GoogleView"
              x:DataType="vm:MainGoogleViewModel" Width="1280" Height="760">
@@ -17,44 +18,55 @@
             <ImageBrush Source="avares://Proyecto_Productos_1ºEval/Assets/fondo_google.jpeg"
                         Stretch="UniformToFill"/>
         </Grid.Background>
-        <Grid RowDefinitions="70,*,80" Width="550" Height="550"
+        <Grid RowDefinitions="90,*,80" Width="550" Height="570"
               Background="White">
             <StackPanel Grid.Row="0" Width="550"
-                        HorizontalAlignment="Center">
+                        HorizontalAlignment="Center" Background="Yellow">
                 <TextBlock Text="Iniciar Sesion" HorizontalAlignment="Center"
-                           FontSize="38" Margin="10,30,10,10"/>
+                           FontSize="38" Margin="10,25,10,0"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Width="550"
                         HorizontalAlignment="Center">
-                <ListBox Name="listLegos" Width="500" Height="350" Margin="20,20,20,5"
+                <ListBox Name="listLegos" Width="500" Height="350" Margin="20,20,20,10"
                          ItemsSource="{Binding ListaUsuarios}"
-                         HorizontalAlignment="Center" SelectionMode="Toggle" >
+                         SelectedItem="{Binding UsuarioSeleccionado}"
+                         HorizontalAlignment="Center" SelectionMode="Toggle">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel HorizontalAlignment="Center" LineSpacing="20" ItemSpacing="20"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
+                    
+                    <Interaction.Behaviors>
+                        <EventTriggerBehavior EventName="SelectionChanged">
+                            <InvokeCommandAction 
+                                Command="{Binding SeleccionUsuarioChangedCommand}"/>
+                        </EventTriggerBehavior>
+                    </Interaction.Behaviors>
+                    
                     <ListBox.Styles>
                         <Style Selector="ListBoxItem:selected">
-                            <Setter Property="Background" Value="LightSteelBlue" />
+                            <Setter Property="Background" Value="Aquamarine" />
                             <Setter Property="BorderBrush" Value="Black" />
                             <Setter Property="BorderThickness" Value="2" />
                         </Style>
                     </ListBox.Styles>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Width="500" Margin="10"
-                                        HorizontalAlignment="Center">
-                                <Image Width="100" Height="100" Margin="30,10"
-                                       HorizontalAlignment="Center"
-                                       asyncImageLoader:ImageLoader.Source="{Binding Imagen}"/>
-                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Email}" Margin="5"
-                                               FontSize="20"/>
-                                    <TextBlock Text="{Binding Nombre}" Margin="5"
-                                               FontSize="20"/>
+                            <controls:Card Width="460" Height="135" HorizontalAlignment="Center" Margin="10">
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Center">
+                                    <Image Width="80" Height="80" Margin="30,10"
+                                           HorizontalAlignment="Center"
+                                           asyncImageLoader:ImageLoader.Source="{Binding Imagen}"/>
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Email}" Margin="5"
+                                                   FontSize="20"/>
+                                        <TextBlock Text="{Binding Nombre}" Margin="5"
+                                                   FontSize="20"/>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
+                            </controls:Card>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
@@ -72,6 +84,7 @@
                 <Button Theme="{StaticResource MaterialOutlineButton}" 
                         Content="Iniciar Sesión" CornerRadius="16"
                         Classes="light" ToolTip.Tip="Pulsa Aquí para Iniciar Sesión"
+                        IsEnabled="{Binding BotonIniciarSesion}"
                         FontSize="20" Height="50" Width="200" Margin="15"
                         Command="{Binding LoginUsuarioCommand}"
                         CommandParameter="{Binding ElementName=listLegos,Path=SelectedItem}"/>

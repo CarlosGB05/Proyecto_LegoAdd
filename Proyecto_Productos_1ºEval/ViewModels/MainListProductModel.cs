@@ -14,17 +14,19 @@ namespace Proyecto_Productos_1ºEval.ViewModels;
 public partial class MainListProductModel : ViewModelBase
 {
     private NavigationService navegacionList;
-    [ObservableProperty] private AvaloniaList<Lego> listaProductos = new();
     [ObservableProperty] private AvaloniaList<Lego> listaLegos = new();
     [ObservableProperty] private Lego legoSeleccionado = new();
     [ObservableProperty] private Lego legoEditar = new();
     [ObservableProperty] private List<string> categoria;
     [ObservableProperty] private bool verEditar = false;
+    [ObservableProperty] private bool verEliminar = false;
+    [ObservableProperty] private string mensaje = "";
+    [ObservableProperty] private bool botonModificarLego = false;
+    [ObservableProperty] private bool botonEliminarLego = false;
 
     public MainListProductModel(NavigationService navegacion)
     {
         navegacionList = navegacion;
-        CargarListaProductos();
         CargarListaLegos();
         CargarCategorias();
     }
@@ -32,42 +34,6 @@ public partial class MainListProductModel : ViewModelBase
     public MainListProductModel()
     {
         
-    }
-
-    public void CargarListaProductos()
-    {
-        Lego p = new Lego()
-        {
-            NumSet = "2121213",
-            Cantidad = 4,
-            Categoria = "Jardineria",
-            Fecha = DateTime.Today
-        };
-        Lego p2 = new Lego()
-        {
-            NumSet = "2121214",
-            Cantidad = 14,
-            Categoria = "Hogar",
-            Fecha = DateTime.Today
-        };
-        Lego p3 = new Lego()
-        {
-            NumSet = "2121214",
-            Cantidad = 14,
-            Categoria = "Hogar",
-            Fecha = DateTime.Today
-        };
-        Lego p4 = new Lego()
-        {
-            NumSet = "2121214",
-            Cantidad = 14,
-            Categoria = "Hogar",
-            Fecha = DateTime.Today
-        };
-        ListaProductos.Add(p);
-        ListaProductos.Add(p2);
-        ListaProductos.Add(p3);
-        ListaProductos.Add(p4);
     }
 
     [RelayCommand]
@@ -126,12 +92,51 @@ public partial class MainListProductModel : ViewModelBase
     [RelayCommand]
     public void CargarLegoSelec()
     {
-        LegoEditar = LegoSeleccionado;
+        if (LegoSeleccionado != null)
+        {
+            BotonEliminarLego = true;
+            BotonModificarLego = true;
+        }
+        else
+        {
+            BotonEliminarLego = false;
+            BotonModificarLego = false;
+        }
     }
     
     [RelayCommand]
     public void VerEditarDialog()
     {
         VerEditar = !VerEditar;
+    }
+    
+    [RelayCommand]
+    public void VerEliminarDialog()
+    {
+        VerEliminar = !VerEliminar;
+    }
+
+    [RelayCommand]
+    public async void ModificarLegoSelec()
+    {
+        ListaLegos = await new DBService().ModificarLego(legoSeleccionado);
+        if (listaLegos != null)
+        {
+            VerEditar = !VerEditar;
+        }
+        else
+        {
+            Mensaje = "Error al editar";
+        }
+    }
+    
+    [RelayCommand]
+    public async void EliminarLegoSelec()
+    {
+        ListaLegos = await new DBService().EliminarLego(legoSeleccionado);
+        if (listaLegos != null)
+        {
+            VerEliminar = !VerEliminar;
+        }
     }
 }

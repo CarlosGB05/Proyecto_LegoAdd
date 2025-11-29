@@ -17,12 +17,30 @@ public class DBService
 
     }
     
-    public async Task<AvaloniaList<Lego>> ObtenerLegos()
+    public async Task <AvaloniaList<Lego>> ObtenerLegos()
     {
         await using var db = new AppDBLego();
         await db.Database.EnsureCreatedAsync();
         var lista = await db.Legos.ToListAsync();
         return new AvaloniaList<Lego>(lista);
 
+    }
+
+    public async Task <AvaloniaList<Lego>> ModificarLego(Lego lego)
+    {
+        await using var db = new AppDBLego();
+        db.Legos.Update(lego);
+        await db.SaveChangesAsync();
+        var lista = await db.Legos.ToListAsync();
+        return new AvaloniaList<Lego>(lista);
+    }
+    
+    public async Task <AvaloniaList<Lego>> EliminarLego(Lego lego)
+    {
+        await using var db = new AppDBLego();
+        db.Legos.Remove(lego);
+        await db.SaveChangesAsync();
+        var lista = await db.Legos.ToListAsync();
+        return new AvaloniaList<Lego>(lista);
     }
 }

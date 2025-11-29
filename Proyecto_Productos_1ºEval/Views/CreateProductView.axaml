@@ -65,20 +65,20 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Theme="{StaticResource MaterialOutlineButton}" 
                             Content="Crear Set Lego" CornerRadius="16"
-                            Classes="light" ToolTip.Tip="Pulsa Aquí para crearlo"
+                            Classes="light" ToolTip.Tip="Pulsa Aquí para Crearlo"
                             FontSize="20" Height="50" Width="200"
                             Command="{Binding CrearLegoCommand}"
                             HorizontalAlignment="Center" Margin="15,15,15,5"/>
                     <Button Theme="{StaticResource MaterialOutlineButton}" 
                             Content="Cancelar Set Lego" CornerRadius="16"
-                            Classes="light" ToolTip.Tip="Pulsa Aquí para cancelarlo"
+                            Classes="light" ToolTip.Tip="Pulsa Aquí para Cancelarlo"
                             FontSize="20" Height="50" Width="200"
                             Command="{Binding CancelarLegoCommand}"
                             HorizontalAlignment="Center" Margin="15,15,15,5"/>
                 </StackPanel>
                 <Button Theme="{StaticResource MaterialOutlineButton}" 
                     Content="Ver Lista Legos" CornerRadius="16"
-                    Classes="light" ToolTip.Tip="Pulsa Aquí para cancelarlo"
+                    Classes="light" ToolTip.Tip="Pulsa Aquí Ver los Sets"
                     FontSize="20" Height="50" Width="200"
                     Command="{Binding NavegarListaCommand}"
                     HorizontalAlignment="Center" Margin="15,15,15,5"/>
